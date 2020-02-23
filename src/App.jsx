@@ -1,18 +1,40 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
+import {BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom';
 
-const App = () => {
-  const [count, setCount] = useState(0);
-
-  useEffect(() => {
-    document.title = `You clicked ${count} times`;
-  });
-
-  return (
+const App = () => (
+  <Router>
     <div>
-      <p>Your clicked {count} times</p>
-      <button onClick={() => setCount(count + 1)}>Click me</button>
+      <nav>
+        <ul>
+          <li>
+            <Link to='/'>Home</Link>
+          </li>
+          <li>
+            <Link to='/about'>About</Link>
+          </li>
+          <li>
+            <Link to='/users'>Users</Link>
+          </li>
+        </ul>
+      </nav>
+      {/** */}
+      <Switch>
+        <Route path='/about'>
+          <About></About>
+        </Route>
+        <Route path='/users'>
+          <Users></Users>
+        </Route>
+        <Route path='/'>
+          <Home></Home>
+        </Route>
+      </Switch>
     </div>
-  );
-};
+  </Router>
+);
+
+const Home = () => <h2>Home</h2>;
+const About = () => <h2>About</h2>;
+const Users = () => <h2>Users</h2>;
 
 export default App;
