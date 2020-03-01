@@ -1,6 +1,7 @@
 import React from 'react';
 import {BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom';
 import RedirectAuth from './redirect-auth';
+import AuthLogin from './auth-login';
 
 const App = () => (
   <Router>
@@ -14,7 +15,7 @@ const App = () => (
             <Link to='/redirect-auth'>RedirectAuth</Link>
           </li>
           <li>
-            <Link to='/users'>Users</Link>
+            <Link to='/auth-login'>Users</Link>
           </li>
         </ul>
       </nav>
@@ -23,8 +24,8 @@ const App = () => (
         <Route path='/redirect-auth'>
           <RedirectAuth />
         </Route>
-        <Route path='/users'>
-          <Users></Users>
+        <Route path='/auth-login'>
+          <AuthLogin />
         </Route>
         <Route path='/'>
           <Home></Home>
@@ -35,6 +36,5 @@ const App = () => (
 );
 
 const Home = () => <h2>Home</h2>;
-const Users = () => <h2>Users</h2>;
 
 export default App;
