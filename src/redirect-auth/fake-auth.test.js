@@ -1,4 +1,7 @@
+import axios from 'axios';
 import FakeAuth from './fake-auth';
+
+jest.mock('axios');
 
 beforeEach(() => {
   jest.useFakeTimers();
@@ -8,12 +11,12 @@ it('should mosk ok!', () => {
   expect(FakeAuth.isAuthenticated).toBeFalsy();
 });
 
-it('should be authenticated', () => {
+xit('should be authenticated', async () => {
   const cb = jest.fn();
-  FakeAuth.authenticated(cb);
+  axios.get.mockImplementation(() => Promise.resolve('just test'));
+  await FakeAuth.authenticated(cb);
   expect(FakeAuth.isAuthenticated).toBeTruthy();
-  expect(setTimeout).toHaveBeenCalledTimes(1);
-  expect(setTimeout).toHaveBeenLastCalledWith(cb, 100);
+  expect(cb).toHaveBeenCalledTimes(1);
 });
 
 it('should be signOut', () => {

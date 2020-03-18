@@ -1,8 +1,14 @@
+import axios from 'axios';
+
 const FakeAuth = {
   isAuthenticated: false,
-  authenticated(cb) {
+  async authenticated(cb) {
     FakeAuth.isAuthenticated = true;
-    setTimeout(cb, 100);
+    const response = await axios
+      .get('/api/getLoginURL')
+      .catch((err) => console.log(err));
+    window.location.href = response.data;
+    cb();
   },
   signOut(cb) {
     FakeAuth.isAuthenticated = false;
